@@ -36,7 +36,6 @@ class BTCMarketsLibrary:
             try:
                 active_balances[cur]['total'] = round(active_balances[cur]['realBalance'] * current_prices[cur]['lastPrice'], 2)
                 active_balances[cur]['lastPrice'] = current_prices[cur]['lastPrice']
-                total += active_balances[cur]['total']
             except:
                 continue
 
