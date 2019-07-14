@@ -4,10 +4,10 @@ class BTCMarketsLibrary:
 
     def get_balances(self, data):
 
-        return self.get_active_currencies(data)
+        return self.__get_active_currencies(data)
 
 
-    def get_active_currencies(self, data):
+    def __get_active_currencies(self, data):
         
         active_currencies = {}
 
@@ -18,12 +18,12 @@ class BTCMarketsLibrary:
                 continue
 
             active_currencies[cur['currency']] = cur
-            active_currencies[cur['currency']]['realBalance'] = self.get_actual_balance(cur['balance'])
+            active_currencies[cur['currency']]['realBalance'] = self.__get_actual_balance(cur['balance'])
 
         return active_currencies
 
 
-    def get_actual_balance(self, volume):
+    def __get_actual_balance(self, volume):
 
         volume = volume / 100000000
         volume = round(volume, 2)

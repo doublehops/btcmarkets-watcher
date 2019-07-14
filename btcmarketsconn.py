@@ -11,7 +11,7 @@ class BTCMarketsConn:
         self.secret = base64.b64decode(secret)
 
 
-    def build_signature(self, path, secret, nowInMilliseconds):
+    def __build_signature(self, path, secret, nowInMilliseconds):
 
         stringToSign = path + "\n" + nowInMilliseconds + "\n"
         hm = hmac.new(secret, stringToSign.encode("utf-8"), hashlib.sha512).digest()
@@ -20,10 +20,10 @@ class BTCMarketsConn:
         return signature
 
 
-    def make_request(self, path):
+    def __make_request(self, path):
 
         timestamp = nowInMilliseconds = str(int(time.time() * 1000))
-        signature = self.build_signature(path, self.secret, nowInMilliseconds)
+        signature = self.__build_signature(path, self.secret, nowInMilliseconds)
 
         headers = {
             'accept': 'application/json', 
@@ -43,7 +43,7 @@ class BTCMarketsConn:
 
     def get_account_balance(self):
 
-        return self.make_request("/account/balance")
+        return self.__make_request("/account/balance")
 
 
     def get_current_prices(self, currencies):
@@ -51,7 +51,7 @@ class BTCMarketsConn:
         current_prices = {}
 
         for cur in currencies:
-            currency = self.make_request("/market/"+ cur +"/AUD/tick")
+            currency = self.__make_request("/market/"+ cur +"/AUD/tick")
             current_prices[cur] = currency
 
         return current_prices
