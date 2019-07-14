@@ -1,14 +1,20 @@
 #!/usr/bin/python
 
-from btcmarkets import BTCMarkets
+from btcmarketsconn import BTCMarketsConn
+from btcmarketslibrary import BTCMarketsLibrary
 import config
 
 
-client = BTCMarkets (config.api_key, config.private_key)
+client = BTCMarketsConn(config.api_key, config.private_key)
+btcmlib = BTCMarketsLibrary()
 
-data = client.get_account_balance()
-#print(data)
+balances = client.get_account_balance()
+active_balances = btcmlib.get_balances(balances)
+current_prices = client.get_current_prices(active_balances.keys())
+holdings = btcmlib.calculate_holdings(current_prices, active_balances)
+print(holdings)
 
-for cur in data:
-    if cur['balance'] != 0:
-        print(cur['currency'] +': '+ str(cur['balance']))
+#for cur in data:
+#    if cur['balance'] != 0:
+#        print(cur['currency'] +': '+ str(cur['balance']))
+

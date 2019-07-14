@@ -1,7 +1,7 @@
 import base64, hashlib, hmac, urllib, urllib.request, time, urllib, json
 from collections import OrderedDict
 
-class BTCMarkets:
+class BTCMarketsConn:
 
     base_url = 'https://api.btcmarkets.net'
 
@@ -44,3 +44,13 @@ class BTCMarkets:
     def get_account_balance(self):
 
         return self.make_request("/account/balance")
+
+    def get_current_prices(self, currencies):
+
+        current_prices = {}
+
+        for cur in currencies:
+            currency = self.make_request("/market/"+ cur +"/AUD/tick")
+            current_prices[cur] = currency
+
+        return current_prices
