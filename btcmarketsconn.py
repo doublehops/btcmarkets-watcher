@@ -45,6 +45,7 @@ class BTCMarketsConn:
 
         return self.make_request("/account/balance")
 
+
     def get_current_prices(self, currencies):
 
         current_prices = {}
