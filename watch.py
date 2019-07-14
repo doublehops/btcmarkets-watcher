@@ -1,5 +1,12 @@
 #!/usr/bin/python
 
+#########################################################
+##
+## This script will pull your holdings from BTCMarkets
+## and print the totals to the screen.
+##
+#########################################################
+
 from btcmarketsconn import BTCMarketsConn
 from btcmarketslibrary import BTCMarketsLibrary
 import config
