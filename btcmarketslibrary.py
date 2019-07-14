@@ -48,7 +48,7 @@ class BTCMarketsLibrary:
 
         print('Currency\tPrice\tQty\ttotal')
         for key, value in holdings.items():
-            print(key +"\t\t", value['lastPrice'], value['realBalance'], "\t", value['total'])
+            print({}\t\t{}\t{}\t{}.format(key, value['lastPrice'], value['realbalance'], value['total'])
             total += value['total']
 
         print('Total: ${}'.format(round(total, 2)))
