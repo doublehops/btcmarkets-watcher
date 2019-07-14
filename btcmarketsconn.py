@@ -1,5 +1,4 @@
 import base64, hashlib, hmac, urllib, urllib.request, time, urllib, json
-from collections import OrderedDict
 
 class BTCMarketsConn:
 
