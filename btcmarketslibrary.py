@@ -4,9 +4,7 @@ class BTCMarketsLibrary:
 
     def get_balances(self, data):
 
-        active_currencies = self.get_active_currencies(data)
-
-        return active_currencies
+        return self.get_active_currencies(data)
 
 
     def get_active_currencies(self, data):
