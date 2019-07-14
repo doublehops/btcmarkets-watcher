@@ -13,9 +13,13 @@ class BTCMarketsLibrary:
         active_currencies = {}
 
         for cur in data:
-            if cur['balance'] != 0:
-                active_currencies[cur['currency']] = cur
-                active_currencies[cur['currency']]['realBalance'] = self.get_actual_balance(cur['balance'])
+            if cur['balance'] == 0:
+                continue
+            if cur['currency'] == 'AUD':
+                continue
+
+            active_currencies[cur['currency']] = cur
+            active_currencies[cur['currency']]['realBalance'] = self.get_actual_balance(cur['balance'])
 
         return active_currencies
 
@@ -28,11 +32,9 @@ class BTCMarketsLibrary:
 
     def calculate_holdings(self, current_prices, active_balances):
 
-        total = 0
-
         for cur in active_balances:
             try:
-                active_balances[cur]['total'] = round(active_balances[cur]['realBalance'] * current_prices[cur]['bestBid'], 2)
+                active_balances[cur]['total'] = round(active_balances[cur]['realBalance'] * current_prices[cur]['lastPrice'], 2)
                 active_balances[cur]['lastPrice'] = current_prices[cur]['lastPrice']
                 total += active_balances[cur]['total']
             except:
@@ -40,3 +42,13 @@ class BTCMarketsLibrary:
 
         return active_balances
 
+    def print_totals(self, holdings):
+
+        total = 0
+
+        print('Currency\tPrice\tQty\ttotal')
+        for key, value in holdings.items():
+            print(key +"\t\t", value['lastPrice'], value['realBalance'], "\t", value['total'])
+            total += value['total']
+
+        print('Total: ${}'.format(round(total, 2)))

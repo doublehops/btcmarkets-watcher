@@ -12,7 +12,8 @@ balances = client.get_account_balance()
 active_balances = btcmlib.get_balances(balances)
 current_prices = client.get_current_prices(active_balances.keys())
 holdings = btcmlib.calculate_holdings(current_prices, active_balances)
-print(holdings)
+
+btcmlib.print_totals(holdings)
 
 #for cur in data:
 #    if cur['balance'] != 0:
