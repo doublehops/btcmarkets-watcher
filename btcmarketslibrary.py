@@ -8,7 +8,6 @@ class BTCMarketsLibrary:
 
 
     def __get_active_currencies(self, data):
-        
         active_currencies = {}
 
         for cur in data:
@@ -22,9 +21,7 @@ class BTCMarketsLibrary:
 
         return active_currencies
 
-
     def __get_actual_balance(self, volume):
-
         volume = volume / 100000000
         volume = round(volume, 2)
 
@@ -32,7 +29,6 @@ class BTCMarketsLibrary:
 
 
     def calculate_holdings(self, current_prices, active_balances):
-
         for cur in active_balances:
             try:
                 active_balances[cur]['total'] = round(active_balances[cur]['realBalance'] * current_prices[cur]['lastPrice'], 2)
@@ -42,9 +38,7 @@ class BTCMarketsLibrary:
 
         return active_balances
 
-
     def print_totals(self, holdings):
-
         total = 0
 
         print('Currency\tPrice\tQty\tTotal')
