@@ -1,17 +1,21 @@
-import base64, hashlib, hmac, urllib, urllib.request, time, urllib, json
+import base64
+import hashlib
+import hmac
+import urllib
+import urllib.request
+import time
+import urllib
+import json
 
 class BTCMarketsConn:
 
     base_url = 'https://api.btcmarkets.net'
 
     def __init__(self, key, secret):
-
         self.key = key
         self.secret = base64.b64decode(secret)
 
-
     def __build_signature(self, path, secret, nowInMilliseconds):
-
         stringToSign = path + "\n" + nowInMilliseconds + "\n"
         hm = hmac.new(secret, stringToSign.encode("utf-8"), hashlib.sha512).digest()
         signature = base64.b64encode(hm)
@@ -20,7 +24,6 @@ class BTCMarketsConn:
 
 
     def __make_request(self, path):
-
         timestamp = nowInMilliseconds = str(int(time.time() * 1000))
         signature = self.__build_signature(path, self.secret, nowInMilliseconds)
 
@@ -39,14 +42,10 @@ class BTCMarketsConn:
 
         return json.load(response)
 
-
     def get_account_balance(self):
-
         return self.__make_request("/account/balance")
 
-
     def get_current_prices(self, currencies):
-
         current_prices = {}
 
         for cur in currencies:
