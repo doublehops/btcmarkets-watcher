@@ -22,7 +22,6 @@ class BTCMarketsConn:
 
         return signature
 
-
     def __make_request(self, path):
         timestamp = nowInMilliseconds = str(int(time.time() * 1000))
         signature = self.__build_signature(path, self.secret, nowInMilliseconds)

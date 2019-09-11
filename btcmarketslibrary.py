@@ -6,7 +6,6 @@ class BTCMarketsLibrary:
 
         return self.__get_active_currencies(data)
 
-
     def __get_active_currencies(self, data):
         active_currencies = {}
 
@@ -26,7 +25,6 @@ class BTCMarketsLibrary:
         volume = round(volume, 2)
 
         return volume
-
 
     def calculate_holdings(self, current_prices, active_balances):
         for cur in active_balances:
